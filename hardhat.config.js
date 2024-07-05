@@ -1,4 +1,7 @@
 require("@nomicfoundation/hardhat-toolbox");
+require('dotenv').config();
+
+const { ALCHEMY_API_KEY, PRIVATE_KEY } = process.env;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -19,8 +22,12 @@ module.exports = {
   networks: {
     hardhat: {
       forking: {
-        url: "https://eth-mainnet.g.alchemy.com/v2/opB4Iw25A0nPWESS7wHxPb_JKigMmAPD",
+        url: `https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
       },
+    },
+    rinkeby: {
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+      accounts: [`0x${PRIVATE_KEY}`],
     },
   },
 };
